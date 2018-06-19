@@ -22,5 +22,9 @@ class RoomUtils {
         this.socketToRoom[socket.id].setReady(socket)
     }
 
+    onPlayerAnswer(socket, data) {
+        this.socketToRoom[socket.id].playerAnswer(socket, data)
+    }
+
 }
 module.exports = RoomUtils;

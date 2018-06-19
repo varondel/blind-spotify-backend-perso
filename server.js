@@ -74,6 +74,10 @@ iop.sockets.on('connection', function (socket) {
   socket.on('ready', function() {
     roomUtils.onPlayerReady(socket)
   })
+
+  socket.on('answer', function(data) {
+    roomUtils.onPlayerAnswer(socket, data)
+  })
 });
 
 

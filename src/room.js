@@ -5,6 +5,7 @@ class Room {
         this.players = new Array()
         this.isFull = false
         this.playerReady = 0
+        this.gameState = "waiting"
     }
 
     askForSong() {
@@ -13,6 +14,7 @@ class Room {
         this.chooser.on('pick', (songData) => {
             this.players[0].emit('play', songData)
             this.players[1].emit('play', songData)
+            this.gameState = "playing"
         })
     }
 
@@ -39,6 +41,24 @@ class Room {
         if (this.playerReady == 2) {
             this.askForSong()
         }
+    }
+
+    playerAnswer(socket, data) {
+        console.log("Answered_2")
+        if (this.gameState != "playing")
+            return
+
+        console.log("Answered_3")
+        if (socket.id == this.players[0].id) {
+            this.players[0].emit("answer", data)
+            this.players[1].emit("otherAnswer", data)
+        }
+        else if (socket.id == this.players[1].id) {
+            this.players[1].emit("answer", data)
+            this.players[0].emit("otherAnswer", data)
+        }
+
+        this.gameState = "waiting"
     }
     
 }
