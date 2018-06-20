@@ -6,15 +6,18 @@ class Room {
         this.isFull = false
         this.playerReady = 0
         this.gameState = "waiting"
+        this.round = 1
     }
 
     askForSong() {
-        this.chooser = this.players[0]
+        this.chooser = this.players[this.round % this.players.length]
+        console.log("Emit Pick")
         this.chooser.emit('pick', '')
         this.chooser.on('pick', (songData) => {
             this.players[0].emit('play', songData)
             this.players[1].emit('play', songData)
             this.gameState = "playing"
+            this.round += 1
         })
     }
 
@@ -40,6 +43,7 @@ class Room {
         console.log('Player Ready ' + this.playerReady)
         if (this.playerReady == 2) {
             this.askForSong()
+            this.playerReady = 0
         }
     }
 

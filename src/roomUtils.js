@@ -15,7 +15,7 @@ class RoomUtils {
             this.rooms.push(new room())
 
         this.rooms[this.rooms.length - 1].addPlayer(socket)
-        this.socketToRoom[socket.id] = this.rooms[0]
+        this.socketToRoom[socket.id] = this.rooms[this.rooms.length - 1]
     }
 
     onPlayerReady(socket) {

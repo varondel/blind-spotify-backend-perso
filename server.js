@@ -15,19 +15,6 @@ let redirect_uri =
 
 var server = http.createServer(app)
 
-// Chargement du fichier index.html affiché au client
-
-
-/*function(req, res) {
-    fs.readFile('./index.html', 'utf-8', function(error, content) {
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.end(content);
-    });
-});
-*/
-
-
-
 app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -76,8 +63,10 @@ iop.sockets.on('connection', function (socket) {
   })
 
   socket.on('answer', function(data) {
-    roomUtils.onPlayerAnswer(socket, data)
+    console.log("Answered")
+    roomUtils.onPlayerAnswer(socket)
   })
+
 });
 
 
