@@ -1,7 +1,7 @@
 let express = require('express')
 let request = require('request')
 let querystring = require('querystring')
-var http = require('http');
+var https = require('https');
 var fs = require('fs');
 
 var RoomUtils = require('./src/roomUtils');
@@ -13,7 +13,7 @@ let redirect_uri =
   process.env.REDIRECT_URI || 
   'http://localhost:8888/callback'
 
-var server = http.createServer(app)
+var server = https.createServer(app)
 
 app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
