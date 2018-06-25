@@ -48,28 +48,6 @@ app.get('/callback', function(req, res) {
   })
 })
 
-// Chargement de socket.io
-var iop = require('socket.io').listen(server);
-
-
-// Quand un client se connecte, on le note dans la console
-iop.sockets.on('connection', function (socket) {
-  console.log('Un client est connecté !');
-
-  roomUtils.addPlayer(socket)
-
-  socket.on('ready', function() {
-    roomUtils.onPlayerReady(socket)
-  })
-
-  socket.on('answer', function(data) {
-    console.log("Answered")
-    roomUtils.onPlayerAnswer(socket)
-  })
-
-});
-
-
 let port = process.env.PORT || 8888
 console.log(process.env.SPOTIFY_CLIENT_ID)
 console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`)
