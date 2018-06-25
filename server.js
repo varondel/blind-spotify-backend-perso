@@ -4,9 +4,6 @@ let querystring = require('querystring')
 var http = require('http');
 var fs = require('fs');
 
-var RoomUtils = require('./src/roomUtils');
-var roomUtils = new RoomUtils()
-
 let app = express()
 
 let redirect_uri = 
